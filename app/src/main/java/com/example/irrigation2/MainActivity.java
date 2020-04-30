@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
         TextView t3 = (TextView) findViewById(R.id.textView4);
         t3.setText("    Canteiros do Lado");
-
+        DownloadJsonAsyncTask d = new DownloadJsonAsyncTask();
+        d.execute("Teste");
     }
 
     public void clickButtom(View view){
