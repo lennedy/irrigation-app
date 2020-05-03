@@ -10,6 +10,8 @@
         android:id="@+id/linearLayout"
         android:layout_width="410dp"
         android:layout_height="561dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -28,26 +30,18 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/GardenTitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TextView" />
 
-                <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
+                <ImageView
+                    android:id="@+id/garden1Activate"
+                    android:layout_width="121dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/imageView8"
-                        android:layout_width="121dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/ic_notification_overlay" />
-                </LinearLayout>
+                    app:srcCompat="@android:drawable/ic_notification_overlay" />
 
             </LinearLayout>
 
@@ -97,13 +91,18 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:orientation="vertical"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="187dp"
             android:background="@drawable/customborder"
             android:orientation="horizontal"
             tools:visibility="visible">
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/GardenTitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -118,29 +117,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/customborder"
-            android:orientation="horizontal"
-            tools:visibility="visible">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
-        </LinearLayout>
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
