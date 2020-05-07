@@ -38,16 +38,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView imgView = (ImageView) findViewById(R.id.imageView8);
+        ImageView imgView = (ImageView) findViewById(R.id.gardenActive1);
         imgView.setImageResource(R.drawable.circvermelho);
 
-        TextView t = (TextView) findViewById(R.id.textView);
+        TextView t = (TextView) findViewById(R.id.gardenName1);
         t.setText("    Gramado da Frente");
 
-        TextView t2 = (TextView) findViewById(R.id.textView5);
+        TextView t2 = (TextView) findViewById(R.id.gardenName2);
         t2.setText("    Canteiros da Frente");
 
-        TextView t3 = (TextView) findViewById(R.id.textView4);
+        TextView t3 = (TextView) findViewById(R.id.gardenName3);
         t3.setText("    Canteiros do Lado");
 //        DownloadJsonAsyncTask d = new DownloadJsonAsyncTask();
 //        d.execute("Teste");
@@ -117,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog = ProgressDialog.show(MainActivity.this, "downloading", "please wait");
-//            progressDialog.dismiss();
         }
 
         @Override
