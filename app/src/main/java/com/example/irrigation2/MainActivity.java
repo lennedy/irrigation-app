@@ -10,6 +10,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     private String urlServer;
     ProgressDialog progressDialog;
+    private Handler customHandler;
+    private Runnable updateTimerThread;
+    private int cont=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +53,37 @@ public class MainActivity extends AppCompatActivity {
 
         TextView t3 = (TextView) findViewById(R.id.gardenName3);
         t3.setText("    Canteiros do Lado");
-//        DownloadJsonAsyncTask d = new DownloadJsonAsyncTask();
-//        d.execute("Teste");
-//        Log.d("T1","lennedy");
 
         textView = (TextView) findViewById(R.id.textView3);
-        urlServer = "http://192.168.1.35:8080/api/activeZones";
+        urlServer = "http://192.168.1.33:8080/api/activeZones";
 
-        /*
+        customHandler = new Handler();
+        customHandler.postDelayed(updateTimerThread, 1000);
+
+    }
+
+    protected void onStop(){
+        customHandler.removeCallbacks(updateTimerThread);
+        super.onStop();
+    }
+
+    {
+        updateTimerThread = new Runnable() {
+
+            public void run() {
+
+                iniciateComunicationWithServer();
+
+                TextView t = (TextView) findViewById(R.id.textBefore2);
+                t.setText(""+cont);
+                cont++;
+                //enter "sendRequest" method here
+                customHandler.postDelayed(this,1000);//you can put 60000(1 minut)
+            }
+        };
+    }
+
+    private void iniciateComunicationWithServer(){
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
@@ -79,35 +106,12 @@ public class MainActivity extends AppCompatActivity {
             builder.create().show();
 
         }
-        */
     }
 
     public void clickActualize(View view){
         //ImageView imgView = (ImageView) findViewById(R.id.gardenActive1);
         //imgView.setImageResource(R.drawable.circverde);
-
-        ConnectivityManager connMgr = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if ((networkInfo != null) && networkInfo.isConnected()) {
-            MyAsync myAsync = new MyAsync();
-            myAsync.execute();
-        }
-        else {
-            AlertDialog.Builder builder = new AlertDialog.
-                    Builder(MainActivity.this);
-            builder.setTitle("Alert!");
-            builder.setMessage("Please check your network connection");
-            builder.setPositiveButton("OK",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            finish();
-                        }
-                    });
-            builder.create().show();
-
-        }
+        iniciateComunicationWithServer();
     }
 
     class MyAsync extends AsyncTask<Void, Void, String> {
