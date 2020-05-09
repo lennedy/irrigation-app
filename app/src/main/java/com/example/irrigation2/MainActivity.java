@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.anychart.AnyChartView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
 
         customHandler = new Handler();
         customHandler.postDelayed(updateTimerThread, 1000);
+
+        AnyChartView anyChartView = findViewById(R.id.any_chart_view);
+        Charts1 c = new Charts1();
+        c.createChart(anyChartView);
 
     }
 
