@@ -5,17 +5,13 @@ import android.util.Log;
 import com.anychart.APIlib;
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
-import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.SingleValueDataSet;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.CircularGauge;
 import com.anychart.core.axes.Circular;
 import com.anychart.core.gauge.pointers.Bar;
 import com.anychart.graphics.vector.Fill;
 import com.anychart.graphics.vector.SolidFill;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Charts1 {
 
