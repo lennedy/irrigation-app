@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private Handler customHandler;
     private Runnable updateTimerThread;
     private int cont=0;
+    private Charts1 c1, c2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +60,22 @@ public class MainActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView3);
         urlServer = "http://192.168.1.33:8080/api/activeZones";
 
+
+        AnyChartView anyChartView = findViewById(R.id.any_chart_view1);
+        c1 = new Charts1(anyChartView);
+        c1.createChart();
+        c1.changeChartValue(0, 0, 0);
+
+
+        AnyChartView anyChartView2 = findViewById(R.id.any_chart_view2);
+        c2 = new Charts1(anyChartView2);
+        c2.createChart();
+        c2.changeChartValue(33, 48, 0);
+
+
         customHandler = new Handler();
         customHandler.postDelayed(updateTimerThread, 1000);
 
-        AnyChartView anyChartView = findViewById(R.id.any_chart_view);
-        Charts1 c = new Charts1();
-        c.createChart(anyChartView);
 
     }
 
@@ -98,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
             myAsync.execute();
         }
         else {
+            customHandler.removeCallbacks(updateTimerThread);
             AlertDialog.Builder builder = new AlertDialog.
                     Builder(MainActivity.this);
             builder.setTitle("Alert!");
@@ -115,9 +127,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickActualize(View view){
-        //ImageView imgView = (ImageView) findViewById(R.id.gardenActive1);
-        //imgView.setImageResource(R.drawable.circverde);
         iniciateComunicationWithServer();
+    }
+
+    public void clickChangeChart(View view){
+        c1.changeChartValue(10, 70, 35);
     }
 
     class MyAsync extends AsyncTask<Void, Void, String> {

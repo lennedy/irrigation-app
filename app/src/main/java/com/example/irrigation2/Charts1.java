@@ -1,18 +1,37 @@
 package com.example.irrigation2;
 
+import android.util.Log;
+
+import com.anychart.APIlib;
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.SingleValueDataSet;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.CircularGauge;
 import com.anychart.core.axes.Circular;
 import com.anychart.core.gauge.pointers.Bar;
 import com.anychart.graphics.vector.Fill;
 import com.anychart.graphics.vector.SolidFill;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Charts1 {
 
-    public void createChart(AnyChartView anyChartView){
-        CircularGauge circularGauge = AnyChart.circular();
+    private CircularGauge circularGauge;
+    private AnyChartView anyChartView;
+
+    public Charts1(AnyChartView anyChartView){
+        this.anyChartView = anyChartView;
+    }
+
+    public void createChart(){
+
+
+        APIlib.getInstance().setActiveAnyChartView(anyChartView);
+
+        circularGauge = AnyChart.circular();
         circularGauge.data(new SingleValueDataSet(new String[] { "23", "90", "67", "93", "56", "100"}));
         circularGauge.fill("#fff")
                 .stroke(null)
@@ -73,6 +92,7 @@ public class Charts1 {
         bar2.fill(new SolidFill("#ef6c00", 1d));
         bar2.stroke(null);
         bar2.zIndex(5d);
+
         Bar bar102 = circularGauge.bar(102d);
         bar102.dataIndex(5d);
         bar102.radius(60d);
@@ -81,8 +101,24 @@ public class Charts1 {
         bar102.stroke("1 #e5e4e4");
         bar102.zIndex(4d);
 
+//        Log.d("Teste","Passei aqui");
         anyChartView.setChart(circularGauge);
+//        CircularGauge circularGauge = AnyChart.circular();
+//        circularGauge.data(new SingleValueDataSet(new String[] { "0", "0", "0", "0", "0", "0"}));
+//        List<DataEntry> data = new ArrayList<>();
+//        data.add(new ValueDataEntry("", 0));
+//        Bar bar = circularGauge.bar(0);
+//        bar.data(data);
 
 
+    }
+
+    public void changeChartValue(int value0, int value1, int value2){
+
+        APIlib.getInstance().setActiveAnyChartView(anyChartView);
+        circularGauge.data(new SingleValueDataSet(new Integer[] {value0, value1, value2, 100, 100, 100}));
+
+//        anyChartView.setChart(circularGauge);
+//
     }
 }
