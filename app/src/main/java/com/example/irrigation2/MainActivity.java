@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            finish();
+                            //finish();
                         }
                     });
             builder.create().show();
@@ -168,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
 
             //Log.d("Teste", s);
             if(s.startsWith("err:")) {
+                customHandler.removeCallbacks(updateTimerThread);
                 AlertDialog.Builder builder = new AlertDialog.
                         Builder(MainActivity.this);
                 builder.setTitle("Alert!");
@@ -176,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                finish();
+                                //finish();
                             }
                         });
                 builder.create().show();
