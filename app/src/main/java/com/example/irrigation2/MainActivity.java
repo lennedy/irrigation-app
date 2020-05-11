@@ -88,19 +88,22 @@ public class MainActivity extends AppCompatActivity {
         updateTimerThread = new Runnable() {
 
             public void run() {
+                boolean conection_realized=false;
 
-                iniciateComunicationWithServer();
+                conection_realized = iniciateComunicationWithServer();
 
                 TextView t = (TextView) findViewById(R.id.textBefore2);
                 t.setText(""+cont);
                 cont++;
                 //enter "sendRequest" method here
-                customHandler.postDelayed(this,1000);//you can put 60000(1 minut)
+                if(conection_realized) {
+                    customHandler.postDelayed(this, 1000);//you can put 60000(1 minut)
+                }
             }
         };
     }
 
-    private void iniciateComunicationWithServer(){
+    private boolean iniciateComunicationWithServer(){
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
@@ -110,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             customHandler.removeCallbacks(updateTimerThread);
+            Log.d("iniciateComunicationServer","parece que eu passei aqui");
             AlertDialog.Builder builder = new AlertDialog.
                     Builder(MainActivity.this);
             builder.setTitle("Alert!");
@@ -123,7 +127,9 @@ public class MainActivity extends AppCompatActivity {
                     });
             builder.create().show();
 
+            return false;
         }
+        return true;
     }
 
     public void clickActualize(View view){
