@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -132,6 +133,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickChangeChart(View view){
         c1.changeChartValue(10, 70, 35);
+    }
+
+    public void clickOnChart(View view){
+        Intent intent = new Intent(MainActivity.this, SensorsActivity.class);
+        startActivity(intent);
+
+        Log.d("clickOnChart","I don't know what is going on");
     }
 
     class MyAsync extends AsyncTask<Void, Void, String> {
