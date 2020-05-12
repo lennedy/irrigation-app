@@ -55,26 +55,26 @@ public class MySpeedometer {
                 .length("1");
 
     // second axis settings
-        Circular axis_1 = gauge.axis(1)
-                .radius(50)
-                .width(3);
+   //     Circular axis_1 = gauge.axis(1)
+   //             .radius(50)
+   //             .width(3);
 
         // second scale settings
-        axis_1.scale()
-                .minimum(0)
-                .maximum(600)
-                .ticks("{interval: 100}")
-    .minorTicks("{interval: 20}");
+   //     axis_1.scale()
+  //              .minimum(0)
+  //              .maximum(600)
+  //              .ticks("{interval: 100}")
+  //  .minorTicks("{interval: 20}");
 
         // second ticks settings
-        axis_1.ticks()
-                .type("trapezium")
-                .length(8);
+   //     axis_1.ticks()
+   //             .type("trapezium")
+   //             .length(8);
 
         // second minor ticks settings
-        axis_1.minorTicks()
-                .enabled(true)
-                .length("3");
+   //     axis_1.minorTicks()
+   //             .enabled(true)
+   //             .length("3");
 
     // needle
         gauge.needle(0)
