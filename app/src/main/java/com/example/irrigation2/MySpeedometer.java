@@ -16,17 +16,10 @@ public class MySpeedometer {
     }
 
     public void createChart(){
-                // create data set on our data
-        //var dataSet = anychart.data.set([100,400]);
-
-        // set the gauge type
-        //gauge = Anychart.gauges.circular();
 
         APIlib.getInstance().setActiveAnyChartView(anyChartView);
         gauge = AnyChart.circular();
 
-        // gauge settings
-        //gauge.data(dataSet);
         gauge.data(new SingleValueDataSet(new Integer[] { 55, 400 }));
         gauge.padding("10%");
         gauge.startAngle(270);
@@ -54,29 +47,7 @@ public class MySpeedometer {
                 .enabled(true)
                 .length("1");
 
-    // second axis settings
-   //     Circular axis_1 = gauge.axis(1)
-   //             .radius(50)
-   //             .width(3);
-
-        // second scale settings
-   //     axis_1.scale()
-  //              .minimum(0)
-  //              .maximum(600)
-  //              .ticks("{interval: 100}")
-  //  .minorTicks("{interval: 20}");
-
-        // second ticks settings
-   //     axis_1.ticks()
-   //             .type("trapezium")
-   //             .length(8);
-
-        // second minor ticks settings
-   //     axis_1.minorTicks()
-   //             .enabled(true)
-   //             .length("3");
-
-    // needle
+        // needle
         gauge.needle(0)
                 .enabled(true)
                 .startRadius("-5%")
@@ -109,8 +80,6 @@ public class MySpeedometer {
                 .radius("6%")
                 .enabled(true);
 
-        // draw the chart
-    //            gauge.container("container").draw();
         anyChartView.setChart(gauge);
 
     }

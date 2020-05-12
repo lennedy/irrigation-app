@@ -30,9 +30,7 @@ public class MyTank {
         axis.scale().maximum(100);
         axis.scale().minimum(0);
 
-
         anyChartView.setChart(gauge);
-
     }
 
     private void changeLabel(String s){
@@ -47,7 +45,6 @@ public class MyTank {
                 .width("25%")
                 .height("10%")
                 .zIndex(10);
-
     }
 
     public void printValue(){
@@ -60,5 +57,4 @@ public class MyTank {
         this.value = value;
         printValue();
     }
-
 }

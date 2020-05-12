@@ -100,15 +100,7 @@ public class Charts1 {
         bar102.stroke("1 #e5e4e4");
         bar102.zIndex(4d);
 
-//        Log.d("Teste","Passei aqui");
         anyChartView.setChart(circularGauge);
-//        CircularGauge circularGauge = AnyChart.circular();
-//        circularGauge.data(new SingleValueDataSet(new String[] { "0", "0", "0", "0", "0", "0"}));
-//        List<DataEntry> data = new ArrayList<>();
-//        data.add(new ValueDataEntry("", 0));
-//        Bar bar = circularGauge.bar(0);
-//        bar.data(data);
-
 
     }
 
@@ -140,7 +132,5 @@ public class Charts1 {
         this.value = (float) ((value0+value1+value2)/3.0);
 
         printValue();
-//        anyChartView.setChart(circularGauge);
-//
     }
 }
