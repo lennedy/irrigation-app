@@ -51,25 +51,6 @@ public class MyTank {
         changeLabel(value+"%");
     }
 
-    public void changeLabel(String s){
-        //gauge label
-        gauge.label(0)
-                .text(s)
-                .anchor("center") //set the position of the label
-                .adjustFontSize(true,true)
-                .hAlign("center")
-                .offsetY("50%")
-                .offsetX("55%")
-                .width("25%")
-                .height("10%")
-                .zIndex(10);
-
-    }
-
-    public void printValue(){
-        changeLabel(value+"%");
-    }
-
     public void changeValue(int value){
         APIlib.getInstance().setActiveAnyChartView(anyChartView);
         gauge.data(new SingleValueDataSet(new Integer[] { value }));
