@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.TextView;
+
+import java.util.Random;
 
 public class SensorsActivity extends AppCompatActivity {
 
@@ -24,6 +27,7 @@ public class SensorsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sensors);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Random r = new Random();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -34,22 +38,31 @@ public class SensorsActivity extends AppCompatActivity {
             }
         });
 
-        AnyChartView tankChartView = findViewById(R.id.tank_chart_view);
+        AnyChartView tankChartView = findViewById(R.id.tank_chart_view1);
         myTank = new MyTank(tankChartView);
         myTank.createChart();
-
-        AnyChartView tankChartView2 = findViewById(R.id.any_chart_view1);
-        MyTank myTank2 = new MyTank(tankChartView2);
-        myTank2.createChart();
+        myTank.changeValue(r.nextInt(100));
 
 
         AnyChartView vmeterChartView1 = findViewById(R.id.vmeter_chart_view1);
         mySpeedometer1 = new MySpeedometer(vmeterChartView1);
         mySpeedometer1.createChart();
+        mySpeedometer1.changeValue(r.nextInt(100));
 
         AnyChartView vmeterChartView2 = findViewById(R.id.vmeter_chart_view2);
         mySpeedometer2 = new MySpeedometer(vmeterChartView2);
         mySpeedometer2.createChart();
+        mySpeedometer2.changeValue(r.nextInt(100));
+
+        TextView textView = (TextView) findViewById(R.id.labelFlow);
+        textView.setText("Fluxo na Linha");
+
+        textView = (TextView) findViewById(R.id.labelPress);
+        textView.setText("Pressão na Linha");
+
+        textView = (TextView) findViewById(R.id.labelTank);
+        textView.setText("Nível do Reservatório");
+
     }
 
     public void clickComeBack(View view){

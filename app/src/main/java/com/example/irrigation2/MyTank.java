@@ -10,6 +10,7 @@ import com.anychart.core.lineargauge.pointers.Tank;
 public class MyTank {
     private AnyChartView anyChartView;
     private LinearGauge gauge;
+    private int value=0;
 
     public MyTank(AnyChartView anyChartView){
         this.anyChartView = anyChartView;
@@ -21,7 +22,7 @@ public class MyTank {
         gauge = AnyChart.tank();
         gauge.data(new SingleValueDataSet(new Integer[] { 55 }));
         Tank tank = gauge.tank(0);
-        tank.width("10%");
+        tank.width("50%");
         tank.offset("10%");
 
         LinearGauge axis = gauge.axis("");
@@ -34,8 +35,30 @@ public class MyTank {
 
     }
 
+    private void changeLabel(String s){
+        //gauge label
+        gauge.label(0)
+                .text(s)
+                .anchor("center") //set the position of the label
+                .adjustFontSize(true,true)
+                .hAlign("center")
+                .offsetY("50%")
+                .offsetX("55%")
+                .width("25%")
+                .height("10%")
+                .zIndex(10);
+
+    }
+
+    public void printValue(){
+        changeLabel(value+"%");
+    }
+
     public void changeValue(int value){
         APIlib.getInstance().setActiveAnyChartView(anyChartView);
         gauge.data(new SingleValueDataSet(new Integer[] { value }));
+        this.value = value;
+        printValue();
     }
+
 }

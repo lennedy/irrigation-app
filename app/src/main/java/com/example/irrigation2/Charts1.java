@@ -12,11 +12,14 @@ import com.anychart.core.gauge.pointers.Bar;
 import com.anychart.graphics.vector.Fill;
 import com.anychart.graphics.vector.SolidFill;
 
+import java.text.DecimalFormat;
+
 
 public class Charts1 {
 
     private CircularGauge circularGauge;
     private AnyChartView anyChartView;
+    private float value=0;
 
     public Charts1(AnyChartView anyChartView){
         this.anyChartView = anyChartView;
@@ -109,11 +112,34 @@ public class Charts1 {
 
     }
 
+    private void changeLabel(String s){
+        //gauge label
+        circularGauge.label(0)
+                .text(s)
+                .anchor("center") //set the position of the label
+                .adjustFontSize(true,true)
+                .hAlign("center")
+                .offsetY("10%")
+                .offsetX("60%")
+                .width("40%")
+                .height("25%")
+                .zIndex(10);
+
+    }
+    private void printValue(){
+        DecimalFormat decimalFormat = new DecimalFormat("#.0");
+        String numberAsString = decimalFormat.format(this.value);
+        changeLabel(numberAsString+"%");
+    }
+
     public void changeChartValue(int value0, int value1, int value2){
 
         APIlib.getInstance().setActiveAnyChartView(anyChartView);
         circularGauge.data(new SingleValueDataSet(new Integer[] {value0, value1, value2, 100, 100, 100}));
 
+        this.value = (float) ((value0+value1+value2)/3.0);
+
+        printValue();
 //        anyChartView.setChart(circularGauge);
 //
     }

@@ -6,31 +6,76 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <com.anychart.AnyChartView
-        android:id="@+id/vmeter_chart_view2"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tank_chart_view"
-        app:layout_constraintEnd_toStartOf="@+id/tank_chart_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vmeter_chart_view1"
-        tools:ignore="MissingConstraints">
-
-    </com.anychart.AnyChartView>
-
-    <com.anychart.AnyChartView
-        android:id="@+id/vmeter_chart_view1"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="24dp"
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toStartOf="@+id/tank_chart_view"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toTopOf="parent">
 
-    </com.anychart.AnyChartView>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <com.anychart.AnyChartView
+                android:id="@+id/vmeter_chart_view1"
+                android:layout_width="150dp"
+                android:layout_height="105dp"
+                tools:ignore="MissingConstraints">
+
+            </com.anychart.AnyChartView>
+
+            <TextView
+                android:id="@+id/labelPress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView" />
+
+            <com.anychart.AnyChartView
+                android:id="@+id/vmeter_chart_view2"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                tools:ignore="MissingConstraints">
+
+            </com.anychart.AnyChartView>
+
+            <TextView
+                android:id="@+id/labelFlow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.anychart.AnyChartView
+                android:id="@+id/tank_chart_view1"
+                android:layout_width="match_parent"
+                android:layout_height="224dp" />
+
+            <TextView
+                android:id="@+id/labelTank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/button"
@@ -43,15 +88,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.anychart.AnyChartView
-        android:id="@+id/tank_chart_view"
-        android:layout_width="126dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-    </com.anychart.AnyChartView>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -64,16 +101,5 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </LinearLayout>
-
-    <com.anychart.AnyChartView
-        android:id="@+id/any_chart_view1"
-        android:layout_width="126dp"
-        android:layout_height="95dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toStartOf="@+id/tank_chart_view"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints">
-
-    </com.anychart.AnyChartView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
