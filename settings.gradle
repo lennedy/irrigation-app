@@ -1,0 +1,2 @@
+rootProject.name='irrigation2'
+include ':app'
