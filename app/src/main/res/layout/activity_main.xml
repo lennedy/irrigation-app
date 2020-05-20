@@ -67,7 +67,7 @@
                 app:srcCompat="@android:drawable/ic_popup_sync" />
 
             <Switch
-                android:id="@+id/switch2"
+                android:id="@+id/automaticSwitch"
                 android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

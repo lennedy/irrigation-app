@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.anychart.AnyChartView;
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 //        t3.setText("    Canteiros do Lado");
 
         textView = (TextView) findViewById(R.id.textView3);
-        urlServer = "http://192.168.1.33:8080/api/activeZones";
+        urlServer = "http://192.168.1.33:8080/api/clientData/controller1";
 
 
         AnyChartView anyChartView = findViewById(R.id.any_chart_view1);
@@ -242,14 +244,15 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(s);
 
                 TextView textView = (TextView) findViewById(R.id.textView);
+                Switch switch1 = (Switch) findViewById(R.id.automaticSwitch);
+                switch1.setChecked(jsonObject.getBoolean("automatic"));
 
-                textView.setText( jsonObject.getBoolean("automatic") ? "Sim": "Não");
+                JSONObject zonesJson  = jsonObject.getJSONObject("activeZones");
+                textView.setText(zonesJson.getString("zones") ); //debug
 
-                JSONObject zonesJson  = jsonObject.getJSONObject("zones");
-
+                zonesJson = zonesJson.getJSONObject("zones");
                 for(String id : zonesId){
-                    zones.get(id).updateActive(zonesJson.getBoolean(id));
-
+                    Objects.requireNonNull(zones.get(id)).updateActive(zonesJson.getBoolean(id));
                 }
 
 
