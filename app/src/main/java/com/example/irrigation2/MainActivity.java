@@ -30,6 +30,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private Runnable updateTimerThread;
     private int cont=0;
     private Charts1 c1, c2;
+    public Map<String, ZoneGui> zones;
+    ArrayList<String> zonesId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +55,48 @@ public class MainActivity extends AppCompatActivity {
         ImageView imgView = (ImageView) findViewById(R.id.gardenActive1);
         imgView.setImageResource(R.drawable.circvermelho);
 
-        TextView t = (TextView) findViewById(R.id.gardenName1);
-        t.setText("    Gramado da Frente");
+        zonesId = new ArrayList<>();
+        zonesId.add("Canteiros Laterais");
+        zonesId.add("Gramado Frontal");
 
-        TextView t2 = (TextView) findViewById(R.id.gardenName2);
-        t2.setText("    Canteiros da Frente");
+        zones = new HashMap<>();
 
-        TextView t3 = (TextView) findViewById(R.id.gardenName3);
-        t3.setText("    Canteiros do Lado");
+        zones.put(zonesId.get(0) , new ZoneGui(
+                findViewById(R.id.gardenName1),
+                findViewById(R.id.gardenActive1),
+                findViewById(R.id.timerViewGarden1),
+                findViewById(R.id.text1Before2),
+                findViewById(R.id.text1After2),
+                findViewById(R.id.any_chart_view1)
+        ) );
+
+        zones.put(zonesId.get(1), new ZoneGui(
+                (TextView)  findViewById(R.id.gardenName2),
+                (ImageView) findViewById(R.id.gardenActive2),
+                (TextView) findViewById(R.id.timerViewGarden2),
+                (TextView) findViewById(R.id.text2Before2),
+                (TextView) findViewById(R.id.text2After2),
+                (AnyChartView) findViewById(R.id.any_chart_view2)
+        ) );
+
+
+/*        zones.put("zone3", new ZoneGui(
+                R.id.gardenName3,
+                R.id.gardenActive3,
+                R.id.timerViewGarden3,
+                R.id.text,
+                R.id.text1After,
+                R.id.any_chart_view1
+        ) );
+*/
+//        TextView t = (TextView) findViewById(R.id.gardenName1);
+//        t.setText("    Gramado da Frente");
+
+//        TextView t2 = (TextView) findViewById(R.id.gardenName2);
+//        t2.setText("    Canteiros da Frente");
+
+//        TextView t3 = (TextView) findViewById(R.id.gardenName3);
+//        t3.setText("    Canteiros do Lado");
 
         textView = (TextView) findViewById(R.id.textView3);
         urlServer = "http://192.168.1.33:8080/api/activeZones";
@@ -72,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
         c2 = new Charts1(anyChartView2);
         c2.createChart();
         c2.changeChartValue(33, 48, 0);
-
 
         customHandler = new Handler();
         customHandler.postDelayed(updateTimerThread, 1000);
@@ -93,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
                 conection_realized = iniciateComunicationWithServer();
 
-                TextView t = (TextView) findViewById(R.id.textBefore2);
+                TextView t = (TextView) findViewById(R.id.text1Before2);
                 t.setText(""+cont);
                 cont++;
                 //enter "sendRequest" method here
@@ -150,7 +189,6 @@ public class MainActivity extends AppCompatActivity {
 
     class MyAsync extends AsyncTask<Void, Void, String> {
 
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -197,66 +235,84 @@ public class MainActivity extends AppCompatActivity {
                 builder.create().show();
 
             }
+
+
+
             try {
                 JSONObject jsonObject = new JSONObject(s);
 
-                JSONObject zones  = jsonObject.getJSONObject("zones");
-                if(zones.length()>0) {
-                    JSONArray jsonArrayValves = zones.names();
+                TextView textView = (TextView) findViewById(R.id.textView);
 
-                    String name = jsonArrayValves.getString(0);
-                    Boolean value = zones.getBoolean(name);
-                    ImageView garden1Activate = (ImageView) findViewById(R.id.gardenActive1);
-                    TextView textView = (TextView) findViewById(R.id.textView);
+                textView.setText( jsonObject.getBoolean("automatic") ? "Sim": "Não");
 
-                    textView.setText(value ? "True" : "False");
+                JSONObject zonesJson  = jsonObject.getJSONObject("zones");
 
-                    if (value) {
-                        garden1Activate.setImageResource(R.drawable.circverde);
-                    } else {
-                        garden1Activate.setImageResource(R.drawable.circvermelho);
-                    }
-/*
-                    textView.setText("");
-                    for (int i = 0; i < jsonArrayValves.length(); i++) {
-                        String name = jsonArrayValves.getString(i);
-                        Boolean value = zones.getBoolean(name);
+                for(String id : zonesId){
+                    zones.get(id).updateActive(zonesJson.getBoolean(id));
 
-                        textView.append(name + "\n");
-                        textView.append(value ? "True" : "False" + "\n");
-                    }*/
                 }
-                /*
-                JSONObject valves  = jsonObject.getJSONObject("valves");
-                if(valves.length()>0) {
-                    JSONArray jsonArrayValves = valves.names();
-                    textView.setText("");
-                    for (int i = 0; i < jsonArrayValves.length(); i++) {
-                        String name = jsonArrayValves.getString(i);
-                        Boolean value = valves.getBoolean(name);
 
-                        textView.append(name + "\n");
-                        textView.append(value ? "True" : "False" + "\n");
-                    }
-                }
-                JSONObject pumps  = jsonObject.getJSONObject("pumps");
-                if(pumps.length()>0){
-                    JSONArray jsonArrayPumps = pumps.names();
-                    for (int i = 0; i < jsonArrayPumps.length(); i++) {
-                        String name = jsonArrayPumps.getString(i);
-                        Boolean value = pumps.getBoolean(name);
 
-                        textView.append(name + "\n");
-                        textView.append( value?"True":"False" + "\n\n");
-                    }
+/*                boolean b = zonesJson.getBoolean("Gramado Frontal");
+                z.updateActive(true);
+                ImageView activeImage = (ImageView) findViewById(R.id.gardenActive1);
+
+                if(b) {
+                    activeImage.setImageResource(R.drawable.circverde);
                 }
-                */
+                else{
+                    activeImage.setImageResource(R.drawable.circvermelho);
+                }
+*/
+//                zones.get("Canteiros Laterais").updateActive(zonesJson.getBoolean("Canteiros Laterais"));
+//                zones.get("Gramado Frontal").updateActive(zonesJson.getBoolean("Gramado Frontal"));
+
+//                zonesJson  = jsonObject.getJSONObject("timeZones");
+//                zones.get("Canteiros Laterais").updateActive(zonesJson.getBoolean("Canteiros Laterais"));
+//                zones.get("Gramado Frontal").updateActive(zonesJson.getBoolean("Gramado Frontal"));
+
 
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
+
+//            for(ZoneGui zone: zones){
+//                zone.updateZone(s);
+//            }
+
+
+/*
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+
+                JSONObject zones  = jsonObject.getJSONObject("zones");
+
+                if(zones.length()>0) {
+                    JSONArray jsonArrayValves = zones.names();
+
+                    String name = jsonArrayValves.getString(0);
+                    //Log.i("", name);
+                    Boolean value = zones.getBoolean(name);
+                    ImageView garden1Activate = (ImageView) findViewById(R.id.gardenActive1);
+                    TextView textView = (TextView) findViewById(R.id.textView);
+
+                    //textView.setText(value ? "True" : "False");
+                    textView.setText(name);
+
+                    if (value) {
+                        garden1Activate.setImageResource(R.drawable.circverde);
+                    } else {
+                        garden1Activate.setImageResource(R.drawable.circvermelho);
+                    }
+
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+*/
         }
     }
 

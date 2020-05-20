@@ -121,14 +121,14 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textBefore1"
+                    android:id="@+id/text1Before1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Irrigado" />
 
                 <TextView
-                    android:id="@+id/textBefore2"
+                    android:id="@+id/text1Before2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -136,7 +136,7 @@
                     android:textSize="24sp" />
 
                 <TextView
-                    android:id="@+id/textBefore3"
+                    android:id="@+id/text1Before3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -151,7 +151,7 @@
                 android:visibility="visible">
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/text1After1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -159,7 +159,7 @@
                     android:visibility="visible" />
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/text1After2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -167,7 +167,7 @@
                     android:textSize="24sp" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/text1After3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -297,7 +297,7 @@
                 android:visibility="visible">
 
                 <TextView
-                    android:id="@+id/text2View2"
+                    android:id="@+id/text2After1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -305,7 +305,7 @@
                     android:visibility="visible" />
 
                 <TextView
-                    android:id="@+id/text2View10"
+                    android:id="@+id/text2After2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -313,7 +313,7 @@
                     android:textSize="24sp" />
 
                 <TextView
-                    android:id="@+id/text2View12"
+                    android:id="@+id/text2After3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
