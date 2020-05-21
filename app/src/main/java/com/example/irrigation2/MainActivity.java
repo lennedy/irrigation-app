@@ -66,20 +66,8 @@ public class MainActivity extends AppCompatActivity {
         zonesId.add("Gramado Frontal");
         zonesId.add("Canteiros Frotais");
 
-
         zones = new HashMap<>();
 
-
-/*
-        zones.put(zonesId.get(0) , new ZoneGui(
-                (TextView) findViewById(R.id.gardenName1),
-                (ImageView) findViewById(R.id.gardenActive1),
-                (TextView) findViewById(R.id.timerViewGarden1),
-                (TextView) findViewById(R.id.text1Before2),
-                (TextView) findViewById(R.id.text1After2),
-                (AnyChartView) findViewById(R.id.any_chart_view1),
-        ) );
-*/
         zones.put(zonesId.get(0), new ZoneGui(
                 (LinearLayout) findViewById(R.id.layoutMainA1),
                 (LinearLayout) findViewById(R.id.layout_A1),
@@ -88,8 +76,6 @@ public class MainActivity extends AppCompatActivity {
                 (ImageView) findViewById(R.id.gardenActive1),
                 (AnyChartView) findViewById(R.id.any_chart_view1)
         ) );
-
-
 
         zones.put(zonesId.get(1), new ZoneGui(
                 (LinearLayout) findViewById(R.id.layoutMainA2),
@@ -109,32 +95,9 @@ public class MainActivity extends AppCompatActivity {
                 (AnyChartView) findViewById(R.id.any_chart_view3)
         ) );
 
-
-
-//        TextView t = (TextView) findViewById(R.id.gardenName1);
-//        t.setText("    Gramado da Frente");
-
-//        TextView t2 = (TextView) findViewById(R.id.gardenName2);
-//        t2.setText("    Canteiros da Frente");
-
-//        TextView t3 = (TextView) findViewById(R.id.gardenName3);
-//        t3.setText("    Canteiros do Lado");
-
         textView = (TextView) findViewById(R.id.textView3);
         urlServer = "http://192.168.1.33:8080/api/clientData/controller1";
 
-/*
-        AnyChartView anyChartView = findViewById(R.id.any_chart_view1);
-        c1 = new Charts1(anyChartView);
-        c1.createChart();
-        c1.changeChartValue(0, 0, 0);
-
-
-        AnyChartView anyChartView2 = findViewById(R.id.any_chart_view2);
-        c2 = new Charts1(anyChartView2);
-        c2.createChart();
-        c2.changeChartValue(33, 48, 0);
-*/
         customHandler = new Handler();
         customHandler.postDelayed(updateTimerThread, 1000);
 
@@ -154,9 +117,6 @@ public class MainActivity extends AppCompatActivity {
 
                 conection_realized = iniciateComunicationWithServer();
 
-//                TextView t = (TextView) findViewById(R.id.text1Before2);
-//                t.setText(""+cont);
-//                cont++;
                 //enter "sendRequest" method here
                 if(conection_realized) {
                     customHandler.postDelayed(this, 1000);//you can put 60000(1 minut)
@@ -256,10 +216,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                 builder.create().show();
-
             }
-
-
 
             try {
                 JSONObject jsonObject = new JSONObject(s);
@@ -269,14 +226,10 @@ public class MainActivity extends AppCompatActivity {
                 switch1.setChecked(jsonObject.getBoolean("automatic"));
 
                 JSONObject zonesJson  = jsonObject.getJSONObject("activeZones");
-                //textView.setText(zonesJson.getString("zones") ); //debug
                 zonesJson = zonesJson.getJSONObject("zones");
 
                 JSONObject activeTimesJson  = jsonObject.getJSONObject("activeTimes").getJSONObject("timeZones");
-                //activeTimesJson = jsonObject.getJSONObject("timeZones");
                 textView.setText( activeTimesJson.getJSONObject("Canteiros Laterais").getString("nextTime") );
-                //JSONArray j = jsonObject.getJSONObject("activeTimes").getJSONObject("timeZones").getJSONArray("Canteiros Laterais");
-                //textView.setText(j.getString(1));
 
                 for(String id : zonesId){
                     Objects.requireNonNull(zones.get(id)).updateActive(zonesJson.getBoolean(id));
@@ -284,67 +237,9 @@ public class MainActivity extends AppCompatActivity {
                    // textView.setText(activeTimesJson.getJSONArray(id).getString(0));
                 }
 
-
-/*                boolean b = zonesJson.getBoolean("Gramado Frontal");
-                z.updateActive(true);
-                ImageView activeImage = (ImageView) findViewById(R.id.gardenActive1);
-
-                if(b) {
-                    activeImage.setImageResource(R.drawable.circverde);
-                }
-                else{
-                    activeImage.setImageResource(R.drawable.circvermelho);
-                }
-*/
-//                zones.get("Canteiros Laterais").updateActive(zonesJson.getBoolean("Canteiros Laterais"));
-//                zones.get("Gramado Frontal").updateActive(zonesJson.getBoolean("Gramado Frontal"));
-
-//                zonesJson  = jsonObject.getJSONObject("timeZones");
-//                zones.get("Canteiros Laterais").updateActive(zonesJson.getBoolean("Canteiros Laterais"));
-//                zones.get("Gramado Frontal").updateActive(zonesJson.getBoolean("Gramado Frontal"));
-
-
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
-//            for(ZoneGui zone: zones){
-//                zone.updateZone(s);
-//            }
-
-
-/*
-            try {
-                JSONObject jsonObject = new JSONObject(s);
-
-                JSONObject zones  = jsonObject.getJSONObject("zones");
-
-                if(zones.length()>0) {
-                    JSONArray jsonArrayValves = zones.names();
-
-                    String name = jsonArrayValves.getString(0);
-                    //Log.i("", name);
-                    Boolean value = zones.getBoolean(name);
-                    ImageView garden1Activate = (ImageView) findViewById(R.id.gardenActive1);
-                    TextView textView = (TextView) findViewById(R.id.textView);
-
-                    //textView.setText(value ? "True" : "False");
-                    textView.setText(name);
-
-                    if (value) {
-                        garden1Activate.setImageResource(R.drawable.circverde);
-                    } else {
-                        garden1Activate.setImageResource(R.drawable.circvermelho);
-                    }
-
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-*/
         }
     }
 
