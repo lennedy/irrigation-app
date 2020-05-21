@@ -89,6 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout0">
 
         <LinearLayout
+            android:id="@+id/layoutMainA1"
             android:layout_width="match_parent"
             android:layout_height="22dp"
             android:gravity="center"
@@ -110,6 +111,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutMainB1"
             android:layout_width="match_parent"
             android:layout_height="95dp"
             android:orientation="horizontal">
@@ -194,6 +196,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutMainC1"
             android:layout_width="240dp"
             android:layout_height="45dp"
             android:background="@drawable/customborder2"
@@ -237,6 +240,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
 
         <LinearLayout
+            android:id="@+id/layoutMainA2"
             android:layout_width="match_parent"
             android:layout_height="22dp"
             android:gravity="center"
@@ -258,6 +262,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutMainB2"
             android:layout_width="match_parent"
             android:layout_height="95dp"
             android:orientation="horizontal">
@@ -341,6 +346,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutMainC2"
             android:layout_width="240dp"
             android:layout_height="45dp"
             android:background="@drawable/customborder2"
@@ -384,6 +390,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <LinearLayout
+            android:id="@+id/layoutMainA3"
             android:layout_width="match_parent"
             android:layout_height="22dp"
             android:gravity="center"
@@ -405,11 +412,91 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutMainB3"
             android:layout_width="match_parent"
             android:layout_height="95dp"
-            android:orientation="horizontal"></LinearLayout>
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/layout.A3"
+                android:layout_width="126dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text3Before1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Irrigado" />
+
+                <TextView
+                    android:id="@+id/text3Before2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="2"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/text3Before3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="horas atrás" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout.B3"
+                android:layout_width="126dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/text3After1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Faltam"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/text3After2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="12"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/text3After3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="horas p/ Irrigar" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.anychart.AnyChartView
+                    android:id="@+id/any_chart_view3"
+                    android:layout_width="126dp"
+                    android:layout_height="95dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutMainC3"
             android:layout_width="240dp"
             android:layout_height="45dp"
             android:background="@drawable/customborder2"
