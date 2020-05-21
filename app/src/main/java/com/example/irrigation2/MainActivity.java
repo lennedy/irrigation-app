@@ -1,5 +1,6 @@
 package com.example.irrigation2;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -10,11 +11,14 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -63,13 +67,17 @@ public class MainActivity extends AppCompatActivity {
 
         zones = new HashMap<>();
 
+
+
         zones.put(zonesId.get(0) , new ZoneGui(
-                findViewById(R.id.gardenName1),
-                findViewById(R.id.gardenActive1),
-                findViewById(R.id.timerViewGarden1),
-                findViewById(R.id.text1Before2),
-                findViewById(R.id.text1After2),
-                findViewById(R.id.any_chart_view1)
+                (TextView) findViewById(R.id.gardenName1),
+                (ImageView) findViewById(R.id.gardenActive1),
+                (TextView) findViewById(R.id.timerViewGarden1),
+                (TextView) findViewById(R.id.text1Before2),
+                (TextView) findViewById(R.id.text1After2),
+                (AnyChartView) findViewById(R.id.any_chart_view1),
+                (LinearLayout) findViewById(R.id.layout_A1),
+                (LinearLayout) findViewById(R.id.layout_B1)
         ) );
 
         zones.put(zonesId.get(1), new ZoneGui(
@@ -78,7 +86,9 @@ public class MainActivity extends AppCompatActivity {
                 (TextView) findViewById(R.id.timerViewGarden2),
                 (TextView) findViewById(R.id.text2Before2),
                 (TextView) findViewById(R.id.text2After2),
-                (AnyChartView) findViewById(R.id.any_chart_view2)
+                (AnyChartView) findViewById(R.id.any_chart_view2),
+                (LinearLayout) findViewById(R.id.layout_A2),
+                (LinearLayout) findViewById(R.id.layout_B2)
         ) );
 
 
@@ -134,9 +144,9 @@ public class MainActivity extends AppCompatActivity {
 
                 conection_realized = iniciateComunicationWithServer();
 
-                TextView t = (TextView) findViewById(R.id.text1Before2);
-                t.setText(""+cont);
-                cont++;
+//                TextView t = (TextView) findViewById(R.id.text1Before2);
+//                t.setText(""+cont);
+//                cont++;
                 //enter "sendRequest" method here
                 if(conection_realized) {
                     customHandler.postDelayed(this, 1000);//you can put 60000(1 minut)
@@ -215,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
             return result;
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -248,11 +259,19 @@ public class MainActivity extends AppCompatActivity {
                 switch1.setChecked(jsonObject.getBoolean("automatic"));
 
                 JSONObject zonesJson  = jsonObject.getJSONObject("activeZones");
-                textView.setText(zonesJson.getString("zones") ); //debug
-
+                //textView.setText(zonesJson.getString("zones") ); //debug
                 zonesJson = zonesJson.getJSONObject("zones");
+
+                JSONObject activeTimesJson  = jsonObject.getJSONObject("activeTimes").getJSONObject("timeZones");
+                //activeTimesJson = jsonObject.getJSONObject("timeZones");
+                textView.setText( activeTimesJson.getJSONObject("Canteiros Laterais").getString("nextTime") );
+                //JSONArray j = jsonObject.getJSONObject("activeTimes").getJSONObject("timeZones").getJSONArray("Canteiros Laterais");
+                //textView.setText(j.getString(1));
+
                 for(String id : zonesId){
                     Objects.requireNonNull(zones.get(id)).updateActive(zonesJson.getBoolean(id));
+                    zones.get(id).updateZone(activeTimesJson.getJSONObject(id));
+                   // textView.setText(activeTimesJson.getJSONArray(id).getString(0));
                 }
 
 
