@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private Handler customHandler;
     private Runnable updateTimerThread;
     private int cont=0;
-    private Charts1 c1, c2;
+    //private Charts1 c1, c2;
     public Map<String, ZoneGui> zones;
     ArrayList<String> zonesId;
 
@@ -64,11 +64,13 @@ public class MainActivity extends AppCompatActivity {
         zonesId = new ArrayList<>();
         zonesId.add("Canteiros Laterais");
         zonesId.add("Gramado Frontal");
+        zonesId.add("Canteiros Frotais");
+
 
         zones = new HashMap<>();
 
 
-
+/*
         zones.put(zonesId.get(0) , new ZoneGui(
                 (TextView) findViewById(R.id.gardenName1),
                 (ImageView) findViewById(R.id.gardenActive1),
@@ -76,31 +78,39 @@ public class MainActivity extends AppCompatActivity {
                 (TextView) findViewById(R.id.text1Before2),
                 (TextView) findViewById(R.id.text1After2),
                 (AnyChartView) findViewById(R.id.any_chart_view1),
-                (LinearLayout) findViewById(R.id.layout_A1),
-                (LinearLayout) findViewById(R.id.layout_B1)
-        ) );
-
-        zones.put(zonesId.get(1), new ZoneGui(
-                (TextView)  findViewById(R.id.gardenName2),
-                (ImageView) findViewById(R.id.gardenActive2),
-                (TextView) findViewById(R.id.timerViewGarden2),
-                (TextView) findViewById(R.id.text2Before2),
-                (TextView) findViewById(R.id.text2After2),
-                (AnyChartView) findViewById(R.id.any_chart_view2),
-                (LinearLayout) findViewById(R.id.layout_A2),
-                (LinearLayout) findViewById(R.id.layout_B2)
-        ) );
-
-
-/*        zones.put("zone3", new ZoneGui(
-                R.id.gardenName3,
-                R.id.gardenActive3,
-                R.id.timerViewGarden3,
-                R.id.text,
-                R.id.text1After,
-                R.id.any_chart_view1
         ) );
 */
+        zones.put(zonesId.get(0), new ZoneGui(
+                (LinearLayout) findViewById(R.id.layoutMainA1),
+                (LinearLayout) findViewById(R.id.layout_A1),
+                (LinearLayout) findViewById(R.id.layout_B1),
+                (LinearLayout) findViewById(R.id.layoutMainC1),
+                (ImageView) findViewById(R.id.gardenActive1),
+                (AnyChartView) findViewById(R.id.any_chart_view1)
+        ) );
+
+
+
+        zones.put(zonesId.get(1), new ZoneGui(
+                (LinearLayout) findViewById(R.id.layoutMainA2),
+                (LinearLayout) findViewById(R.id.layout_A2),
+                (LinearLayout) findViewById(R.id.layout_B2),
+                (LinearLayout) findViewById(R.id.layoutMainC2),
+                (ImageView) findViewById(R.id.gardenActive2),
+                (AnyChartView) findViewById(R.id.any_chart_view2)
+        ) );
+
+        zones.put(zonesId.get(2), new ZoneGui(
+                (LinearLayout) findViewById(R.id.layoutMainA3),
+                (LinearLayout) findViewById(R.id.layout_A3),
+                (LinearLayout) findViewById(R.id.layout_B3),
+                (LinearLayout) findViewById(R.id.layoutMainC3),
+                (ImageView) findViewById(R.id.gardenActive3),
+                (AnyChartView) findViewById(R.id.any_chart_view3)
+        ) );
+
+
+
 //        TextView t = (TextView) findViewById(R.id.gardenName1);
 //        t.setText("    Gramado da Frente");
 
@@ -113,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView3);
         urlServer = "http://192.168.1.33:8080/api/clientData/controller1";
 
-
+/*
         AnyChartView anyChartView = findViewById(R.id.any_chart_view1);
         c1 = new Charts1(anyChartView);
         c1.createChart();
@@ -124,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         c2 = new Charts1(anyChartView2);
         c2.createChart();
         c2.changeChartValue(33, 48, 0);
-
+*/
         customHandler = new Handler();
         customHandler.postDelayed(updateTimerThread, 1000);
 
@@ -189,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickChangeChart(View view){
-        c1.changeChartValue(10, 70, 35);
+//        c1.changeChartValue(10, 70, 35);
     }
 
     public void clickOnChart(View view){
@@ -270,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
 
                 for(String id : zonesId){
                     Objects.requireNonNull(zones.get(id)).updateActive(zonesJson.getBoolean(id));
-                    zones.get(id).updateZone(activeTimesJson.getJSONObject(id));
+                    Objects.requireNonNull(zones.get(id)).updateZone(activeTimesJson.getJSONObject(id));
                    // textView.setText(activeTimesJson.getJSONArray(id).getString(0));
                 }
 
