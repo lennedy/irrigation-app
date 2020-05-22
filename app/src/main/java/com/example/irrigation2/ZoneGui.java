@@ -66,15 +66,15 @@ public class ZoneGui extends AppCompatActivity {
 
         this.layoutA = layoutA;
         this.layoutB = layoutB;
-        this.activeImage    = imageView;
         this.moistureSensors= chart;
 
         int qtdLayouts1 = layout1.getChildCount();
         ArrayList<View> l1 = new ArrayList<>();
         for(int i=0; i<qtdLayouts1; i++) {
-            l1.add( layoutB.getChildAt(i) );
+            l1.add( layout1.getChildAt(i) );
         }
         this.zoneName = (TextView) l1.get(0);
+        this.activeImage = (ImageView)l1.get(1);
 
 
         int qtdLayoutA = layoutA.getChildCount();
@@ -123,6 +123,10 @@ public class ZoneGui extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    public void changeMainLabel(String labeltext){
+        this.zoneName.setText(labeltext);
     }
 
     public void updateActive(boolean active){
@@ -174,8 +178,6 @@ public class ZoneGui extends AppCompatActivity {
             layoutB.setVisibility(View.INVISIBLE);
             textAfter.setText("-");
         }
-
-
     }
 
 }

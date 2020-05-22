@@ -95,6 +95,17 @@ public class MainActivity extends AppCompatActivity {
                 (AnyChartView) findViewById(R.id.any_chart_view3)
         ) );
 
+        for(String zoneName : zonesId){
+            try {
+                zones.get(zoneName).changeMainLabel(zoneName);
+            }catch (NullPointerException e){
+                Log.e("zones objects problem",e.getMessage());
+                finish();
+            }
+
+        }
+
+
         textView = (TextView) findViewById(R.id.textView3);
         urlServer = "http://192.168.1.33:8080/api/clientData/controller1";
 
@@ -231,10 +242,15 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject activeTimesJson  = jsonObject.getJSONObject("activeTimes").getJSONObject("timeZones");
                 textView.setText( activeTimesJson.getJSONObject("Canteiros Laterais").getString("nextTime") );
 
-                for(String id : zonesId){
-                    Objects.requireNonNull(zones.get(id)).updateActive(zonesJson.getBoolean(id));
-                    Objects.requireNonNull(zones.get(id)).updateZone(activeTimesJson.getJSONObject(id));
-                   // textView.setText(activeTimesJson.getJSONArray(id).getString(0));
+                try{
+                    for(String id : zonesId){
+                        Objects.requireNonNull(zones.get(id)).updateActive(zonesJson.getBoolean(id));
+                        Objects.requireNonNull(zones.get(id)).updateZone(activeTimesJson.getJSONObject(id));
+                       // textView.setText(activeTimesJson.getJSONArray(id).getString(0));
+                    }
+                }catch (NullPointerException e){
+                    Log.e("zones objects problem",e.getMessage());
+                    finish();
                 }
 
             } catch (JSONException e) {
