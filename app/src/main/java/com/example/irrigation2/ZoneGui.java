@@ -58,6 +58,11 @@ public class ZoneGui extends AppCompatActivity {
     }
 
     public ZoneGui(LinearLayout layout1, LinearLayout layoutA, LinearLayout layoutB, LinearLayout layout3, ImageView imageView, AnyChartView chart){
+        TextView labelA0 =  null;
+        TextView labelA2 =  null;
+        TextView labelB0 =  null;
+        TextView labelB2 =  null;
+
 
         this.layoutA = layoutA;
         this.layoutB = layoutB;
@@ -71,12 +76,17 @@ public class ZoneGui extends AppCompatActivity {
         }
         this.zoneName = (TextView) l1.get(0);
 
+
         int qtdLayoutA = layoutA.getChildCount();
         ArrayList<View> la = new ArrayList<>();
         for(int i=0; i<qtdLayoutA; i++){
            la.add(layoutA.getChildAt(i));
         }
+
         this.textBefore = (TextView) la.get(1);
+        labelA0 = (TextView) la.get(0);
+        labelA2 = (TextView) la.get(2);
+
 
         int qtdLayoutsB = layoutB.getChildCount();
         ArrayList<View> lb = new ArrayList<>();
@@ -84,6 +94,8 @@ public class ZoneGui extends AppCompatActivity {
             lb.add( layoutB.getChildAt(i) );
         }
         this.textAfter = (TextView) lb.get(1);
+        labelB0 = (TextView) lb.get(0);
+        labelB2 = (TextView) lb.get(2);
 
         int qtdLayout3 = layout3.getChildCount();
         ArrayList<View> l3 = new ArrayList<>();
@@ -97,6 +109,15 @@ public class ZoneGui extends AppCompatActivity {
         c1.createChart();
         c1.changeChartValue(75, 50, 75);
 
+        labelA0.setText("Irrigado");
+        labelA2.setText("atrás");
+
+        labelB0.setText("Falta");
+        labelB2.setText("para irrigar");
+
+        this.textBefore.setText("--:--");
+        this.textAfter.setText("--:--");
+        this.activeTimeText.setText("--:--");
 
     }
 
@@ -116,7 +137,7 @@ public class ZoneGui extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void updateZone(JSONObject jsonText) throws JSONException {
-        DateFormat hour     = new SimpleDateFormat("HH");
+        DateFormat hour     = new SimpleDateFormat("HH:mm");
         DateFormat minute   = new SimpleDateFormat("mm");
 
         if(!this.active) {
@@ -132,14 +153,22 @@ public class ZoneGui extends AppCompatActivity {
 
             }
 
-            int difference = Integer.parseInt(hour.format(nextTime)) - Integer.parseInt(hour.format(currentTime));
-            if (difference == 0) {
-                difference = Integer.parseInt(minute.format(nextTime)) - Integer.parseInt(minute.format(currentTime));
-            } else if (difference < 0) {
-                difference += 12;
+            Date horaTest=null;
+
+            long diff = nextTime.getTime() - currentTime.getTime();
+            long diffSeconds = diff / 1000 % 60;
+            long diffMinutes = diff / (60 * 1000) % 60;
+            long diffHours = diff / (60 * 60 * 1000) % 24;
+            long diffDays = diff / (24 * 60 * 60 * 1000);
+
+            try {
+                horaTest = hour.parse(diffHours + ":" + diffMinutes);
+            }catch (ParseException e){
+
             }
 
-            textAfter.setText("" + difference);
+            textAfter.setText( hour.format(horaTest) );
+
         }else{
             layoutA.setVisibility(View.INVISIBLE);
             layoutB.setVisibility(View.INVISIBLE);
