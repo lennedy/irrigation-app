@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     //private Charts1 c1, c2;
     public Map<String, ZoneGui> zones;
     ArrayList<String> zonesId;
+    boolean changed=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+
+      //  Switch a = findViewById( R.id.automaticSwitch );
+
 
 
         textView = (TextView) findViewById(R.id.textView3);
@@ -178,6 +182,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
         Log.d("clickOnChart","I don't know what is going on");
+    }
+
+    public void clickAutomatic (View view){
+        Switch s = (Switch) view;
+        s.onCheckIsTextEditor();
+
+        this.changed=true;
+        Log.d("Teste", "Estamos passando por aqui");
+        //iniciateComunicationWithServer();
     }
 
     class MyAsync extends AsyncTask<Void, Void, String> {
