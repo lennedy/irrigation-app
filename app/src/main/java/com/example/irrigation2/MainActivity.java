@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickOnChart(View view){
-        Intent intent = new Intent(MainActivity.this, SensorsActivity.class);
+        Intent intent = new Intent(MainActivity.this, ScrollingActivity.class);
         startActivity(intent);
 
         Log.d("clickOnChart","I don't know what is going on");
