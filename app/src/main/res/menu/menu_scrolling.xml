@@ -7,4 +7,11 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/brushSizeItem"
+        android:actionLayout="@layout/radio_group_item"
+        android:title=""
+        app:showAsAction="ifRoom" />
+
 </menu>
