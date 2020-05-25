@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">irrigation2</string>
+    <string name="title_activity_scrolling">Irrigação</string>
+    <string name="title_activity_sensors">Sensores</string>
+    <string name="automatic">Automático</string>
+    <string name="manual">Manual</string>
+    <string name="update">Atualizar dados</string>
+</resources>
