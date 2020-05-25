@@ -59,9 +59,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView imgView = (ImageView) findViewById(R.id.gardenActive1);
-        imgView.setImageResource(R.drawable.circvermelho);
-
         zonesId = new ArrayList<>();
         zonesId.add("Canteiros Laterais");
         zonesId.add("Gramado Frontal");
@@ -106,11 +103,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-      //  Switch a = findViewById( R.id.automaticSwitch );
-
-
-
-        textView = (TextView) findViewById(R.id.textView3);
         urlServer = "http://192.168.1.33:8080/api/clientData/controller1";
 
         customHandler = new Handler();
@@ -241,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
                         });
                 builder.create().show();
             }
+            /*
 
             try {
                 JSONObject jsonObject = new JSONObject(s);
@@ -265,10 +258,10 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("zones objects problem",e.getMessage());
                     finish();
                 }
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            */
         }
     }
 
