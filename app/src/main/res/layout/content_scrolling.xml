@@ -35,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="@string/zone1" />
 
                 <ImageView
                     android:id="@+id/gardenActive1"
@@ -63,14 +63,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Irrigado" />
+                        android:text="@string/watered" />
 
                     <TextView
                         android:id="@+id/text1Before2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="2"
+                        android:text="@string/timeErr"
                         android:textSize="24sp" />
 
                     <TextView
@@ -78,7 +78,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="horas atrás" />
+                        android:text="@string/before" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -102,7 +102,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="12"
+                        android:text="@string/timeErr"
                         android:textSize="24sp" />
 
                     <TextView
@@ -151,7 +151,7 @@
                     android:layout_height="32dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="TextView" />
+                    android:text="@string/timeErr" />
 
                 <ImageButton
                     android:id="@+id/startButtonGarden1"
@@ -186,7 +186,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="@string/zone2" />
 
                 <ImageView
                     android:id="@+id/gardenActive2"
@@ -214,14 +214,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Irrigado" />
+                        android:text="@string/watered" />
 
                     <TextView
                         android:id="@+id/text2Before2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="2"
+                        android:text="@string/timeErr"
                         android:textSize="24sp" />
 
                     <TextView
@@ -229,7 +229,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="horas atrás" />
+                        android:text="@string/before" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -253,7 +253,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="12"
+                        android:text="@string/timeErr"
                         android:textSize="24sp" />
 
                     <TextView
@@ -301,7 +301,7 @@
                     android:layout_height="32dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="TextView" />
+                    android:text="@string/timeErr" />
 
                 <ImageButton
                     android:id="@+id/startButtonGarden2"
@@ -336,7 +336,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView" />
+                    android:text="@string/zone3" />
 
                 <ImageView
                     android:id="@+id/gardenActive3"
@@ -364,14 +364,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Irrigado" />
+                        android:text="@string/watered" />
 
                     <TextView
                         android:id="@+id/text3Before2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="2"
+                        android:text="@string/timeErr"
                         android:textSize="24sp" />
 
                     <TextView
@@ -379,7 +379,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="horas atrás" />
+                        android:text="@string/before" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -403,7 +403,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="12"
+                        android:text="@string/timeErr"
                         android:textSize="24sp" />
 
                     <TextView
@@ -451,7 +451,7 @@
                     android:layout_height="32dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="TextView" />
+                    android:text="@string/timeErr" />
 
                 <ImageButton
                     android:id="@+id/startButtonGarden3"

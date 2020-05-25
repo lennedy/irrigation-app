@@ -17,4 +17,10 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="automatic">Automatic</string>
     <string name="update">Update data</string>
+    <string name="zone1" translatable="false">Zone 1</string>
+    <string name="zone2" translatable="false">Zone 2</string>
+    <string name="zone3" translatable="false">Zone 3</string>
+    <string name="watered">Watered</string>
+    <string name="before">before</string>
+    <string name="timeErr" translatable="false">--:--</string>
 </resources>

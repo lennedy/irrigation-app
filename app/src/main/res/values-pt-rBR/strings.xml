@@ -7,4 +7,6 @@
     <string name="manual">Manual</string>
     <string name="update">Atualizar dados</string>
     <string name="action_settings">Configuração</string>
+    <string name="watered">Irrigado</string>
+    <string name="before">atrás</string>
 </resources>
