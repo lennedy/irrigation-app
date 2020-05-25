@@ -4,7 +4,8 @@
     tools:context="com.example.irrigation2.ScrollingActivity">
     <item
         android:icon="@android:drawable/stat_notify_sync"
-        android:title="@string/update" />
+        android:title="@string/update"
+        android:onClick="onClickUpdate"/>
     <item android:title="@string/title_activity_sensors"
         android:onClick="onClickOpenSensor"/>
     <item

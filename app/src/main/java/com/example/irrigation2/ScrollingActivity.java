@@ -205,6 +205,10 @@ public class ScrollingActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onClickUpdate(MenuItem menu){
+        iniciateComunicationWithServer();
+    }
+
     private String inputStreamToString(InputStream is) {
         String rLine = "";
         StringBuilder answer = new StringBuilder();
