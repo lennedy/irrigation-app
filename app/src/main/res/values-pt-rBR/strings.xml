@@ -6,4 +6,5 @@
     <string name="automatic">Automático</string>
     <string name="manual">Manual</string>
     <string name="update">Atualizar dados</string>
+    <string name="action_settings">Configuração</string>
 </resources>
