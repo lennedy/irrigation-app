@@ -25,7 +25,8 @@
         <activity
             android:name=".SensorsActivity"
             android:label="@string/title_activity_sensors"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".ScrollingActivity"/>
         <activity android:name=".MainActivity">
         </activity>
     </application>
