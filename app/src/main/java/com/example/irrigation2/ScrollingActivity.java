@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -199,6 +200,11 @@ public class ScrollingActivity extends AppCompatActivity {
         manual.setChecked(true);
     }
 
+    public void onClickOpenSensor(MenuItem menu){
+        Intent intent = new Intent(ScrollingActivity.this, SensorsActivity.class);
+        startActivity(intent);
+    }
+
     private String inputStreamToString(InputStream is) {
         String rLine = "";
         StringBuilder answer = new StringBuilder();
@@ -294,7 +300,7 @@ public class ScrollingActivity extends AppCompatActivity {
                         Objects.requireNonNull(zones.get(id)).updateZone(activeTimesJson.getJSONObject(id));
                         // textView.setText(activeTimesJson.getJSONArray(id).getString(0));
 
-                         
+
                     }
                 }catch (NullPointerException e){
                     Log.e("zones objects problem", Objects.requireNonNull(e.getMessage()));

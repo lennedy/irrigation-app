@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.irrigation2.ScrollingActivity">
     <item
+        android:icon="@android:drawable/stat_notify_sync"
+        android:title="@string/update" />
+    <item android:title="@string/title_activity_sensors"
+        android:onClick="onClickOpenSensor"/>
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
