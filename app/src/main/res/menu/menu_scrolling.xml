@@ -15,8 +15,9 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/brushSizeItem"
+        android:id="@+id/automaticRadio"
         android:actionLayout="@layout/radio_group_item"
+        android:onClick="changeData"
         android:title=""
         app:showAsAction="ifRoom" />
 

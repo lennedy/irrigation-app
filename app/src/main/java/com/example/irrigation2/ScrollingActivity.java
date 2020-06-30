@@ -36,6 +36,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -56,7 +57,8 @@ public class ScrollingActivity extends AppCompatActivity {
     private ArrayList<String> zonesId;
     private Map<String, ZoneGui> zones;
 
-    private String urlServer;
+    private String urlServerGet;
+    private String urlServerSend;
 
 
 
@@ -111,7 +113,8 @@ public class ScrollingActivity extends AppCompatActivity {
 
         }
 
-        urlServer = "http://192.168.1.33:8080/api/clientData/controller1";
+        urlServerGet    = "http://192.168.1.49:8080/api/clientData/controller1";
+        urlServerSend   = "http://192.168.1.49:8080/api/ClientChangeData/controller1";
 
         customHandler = new Handler();
         customHandler.postDelayed(updateTimerThread, 1000);
@@ -173,7 +176,7 @@ public class ScrollingActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_scrolling, menu);
 
-        MenuItem brushSizeItem = menu.findItem(R.id.brushSizeItem);
+        MenuItem brushSizeItem = menu.findItem(R.id.automaticRadio);
         brushSizeItem.setActionView(R.layout.radio_group_item);
 
         return true;
@@ -198,16 +201,68 @@ public class ScrollingActivity extends AppCompatActivity {
         RadioButton manual = (RadioButton) findViewById(R.id.manual);
         //automatic.setChecked(false);
         manual.setChecked(true);
+        TextView t = (TextView) findViewById(R.id.text1Before1);
+        String s = "zones"+ ":{";
+
+//        for(String id : zonesId){
+//            s += "\""+id+"\":false,";
+//        }
+        s +="}";
+
+        JSONObject postData = new JSONObject();
+        JSONObject postData2 = new JSONObject();
+        JSONObject postData3 = new JSONObject();
+
+        try {
+            postData3.put("Canteiros Laterais", false);
+            postData2.put("zones", postData3.toString());
+            postData.put("automatic", false);
+            postData.put("activeZones", postData2.toString());
+            //t.setText(postData.toString());
+
+        }catch (Exception e){
+                e.printStackTrace();
+        }
+
+        String data = "";
+        HttpURLConnection httpURLConnection = null;
+        DataOutputStream wr;
+
+        try {
+            httpURLConnection = (HttpURLConnection) new URL(urlServerSend).openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setDoOutput(true);
+
+            data = "{\"activeZones\":{\"zones\": {}}, \"automatic\": false}";
+            t.setText(data);
+            wr = new DataOutputStream(httpURLConnection.getOutputStream());
+            wr.writeBytes("PostData=" + data); //postData.toString());
+            wr.flush();
+            wr.close();
+
+        }
+        catch (Exception e){}
+
     }
 
     public void onClickOpenSensor(MenuItem menu){
+
         Intent intent = new Intent(ScrollingActivity.this, SensorsActivity.class);
         startActivity(intent);
     }
 
-    public void onClickUpdate(MenuItem menu){
-        iniciateComunicationWithServer();
+    public void changeData(MenuItem menu){
+        RadioButton automatic = (RadioButton) findViewById(R.id.automatic);
+
+        automatic.isChecked();
+
+        TextView t = (TextView) findViewById(R.id.text1Before2);
+
+        t.setText("Passei aqui");
+
     }
+
+    public void onClickUpdate(MenuItem menu){ iniciateComunicationWithServer();    }
 
     private String inputStreamToString(InputStream is) {
         String rLine = "";
@@ -232,14 +287,25 @@ public class ScrollingActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
+//            JSONObject postData = new JSONObject();
+//            try {
+//                postData.put("automatic", false);
+//                postData.put("activeZones", "{zones: {}}");
+
+//                new SendDeviceDetails().execute("http://52.88.194.67:8080/IOTProjectServer/registerDevice", postData.toString());
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
             progressDialog = ProgressDialog.show(ScrollingActivity.this, "downloading", "please wait");
+
         }
 
         @Override
         protected String doInBackground(Void... voids) {
             String result = "err: ";//"";
             try {
-                URL url = new URL(urlServer);
+                URL url = new URL(urlServerGet);
 
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
@@ -280,7 +346,6 @@ public class ScrollingActivity extends AppCompatActivity {
             try {
                 JSONObject jsonObject = new JSONObject(s);
 
-//                TextView textView = (TextView) findViewById(R.id.textView);
                 RadioButton automatic = (RadioButton) findViewById(R.id.automatic);
                 RadioButton manual = (RadioButton) findViewById(R.id.manual);
                 boolean automaticController = jsonObject.getBoolean("automatic");
@@ -294,17 +359,12 @@ public class ScrollingActivity extends AppCompatActivity {
                 zonesJson = zonesJson.getJSONObject("zones");
 
                 JSONObject activeTimesJson  = jsonObject.getJSONObject("activeTimes").getJSONObject("timeZones");
-//                textView.setText( activeTimesJson.getJSONObject("Canteiros Laterais").getString("nextTime") );
 
                 try{
                     for(String id : zonesId){
-
                         Objects.requireNonNull(zones.get(id)).updateActive(zonesJson.getBoolean(id));
 
                         Objects.requireNonNull(zones.get(id)).updateZone(activeTimesJson.getJSONObject(id));
-                        // textView.setText(activeTimesJson.getJSONArray(id).getString(0));
-
-
                     }
                 }catch (NullPointerException e){
                     Log.e("zones objects problem", Objects.requireNonNull(e.getMessage()));
