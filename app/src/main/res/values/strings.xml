@@ -23,4 +23,5 @@
     <string name="watered">Watered</string>
     <string name="before">before</string>
     <string name="timeErr" translatable="false">--:--</string>
+    <string name="pleaseWait">Please Wait</string>
 </resources>
